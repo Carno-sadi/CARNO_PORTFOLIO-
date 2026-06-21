@@ -1,25 +1,3 @@
-// ===== LENIS SMOOTH SCROLL ===== (must be first in logic.js)
-
-const lenis = new Lenis({
-  duration: 1.1,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  orientation: 'vertical',
-  gestureOrientation: 'vertical',
-  smoothWheel: true,
-  wheelMultiplier: 1,
-  touchMultiplier: 1.5,
-  infinite: false,
-});
-
-// Tell ScrollTrigger to recalculate on every Lenis scroll tick
-lenis.on('scroll', ScrollTrigger.update);
-
-// Tell GSAP's internal ticker to drive Lenis (keeps both perfectly synced)
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0);
-
 // ══════════════════════════════════════════
 // PRELOADER
 // ══════════════════════════════════════════
@@ -243,7 +221,6 @@ function openTopMenu() {
   topOverlay.classList.add('open');
   hamburgerBtn.classList.add('open');
   document.body.style.overflow = 'hidden';
-  lenis.stop();
 
   // GSAP: Links drop in from above — staggered
   // overwrite + killTweensOf prevents conflict on rapid toggle
@@ -284,7 +261,6 @@ function closeTopMenu() {
       topOverlay.classList.remove('open');
       hamburgerBtn.classList.remove('open');
       document.body.style.overflow = '';
-      lenis.start();
       // Reset for next open
       gsap.set(topMenuLinks, { y: -30, opacity: 0, rotateX: -60 });
     }
@@ -303,19 +279,13 @@ topMenuLinks.forEach(l => l.addEventListener('click', closeTopMenu));
 
 
 // ══════════════════════════════════════════
-// 5. SMOOTH SCROLL (via Lenis)
+// 5. SMOOTH SCROLL
 // ══════════════════════════════════════════
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
     const t = document.querySelector(a.getAttribute('href'));
-    if (t) {
-      lenis.scrollTo(t, {
-        offset: -64,
-        duration: 1.3,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      });
-    }
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
@@ -333,7 +303,7 @@ const TIER = (() => {
   const low    = cores <= 2 || mobile;
   const mid    = cores <= 4;
   return {
-    P_COUNT:   low ? 30 : mid ? 120 : 176,
+    P_COUNT:   low ? 36 : mid ? 120 : 176,
     P_CONNECT: low ? 60 : 100,
     P_REPEL:   low ? 100 : 130,
     FPS:       low ? 30 : 60,
@@ -1989,40 +1959,6 @@ function initBlobs() {
 }
 initBlobs();
 
-const contactForm = document.getElementById("contact-form");
-const submitBtn = document.getElementById("formSubmit");
-const submitContent = document.getElementById("submitContent");
-const statusMessage = document.getElementById("status-message");
-
-if (contactForm) {
-  const originalHTML = submitContent.innerHTML;
-
-  contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const name = this.querySelector('[name="name"]').value.trim();
-    const email = this.querySelector('[name="email"]').value.trim();
-    const message = this.querySelector('[name="message"]').value.trim();
-
-    const subject = `Portfolio Contact — ${name}`;
-    const body = `${message}%0A%0A—%0AReply to: ${email}`;
-    const mailto = `mailto:carno478@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-
-    submitBtn.classList.add("success");
-    submitContent.innerHTML = "<span>✓ Opening mail...</span>";
-    statusMessage.style.color = "#28c840";
-    statusMessage.textContent = "Opening your email client...";
-
-    window.location.href = mailto;
-
-    setTimeout(() => {
-      submitBtn.classList.remove("success");
-      submitContent.innerHTML = originalHTML;
-      statusMessage.textContent = "";
-      contactForm.reset();
-    }, 3000);
-  });
-}
 
 /* ══════════════════════════════════════════
    Carno Portfolio — Footer Section

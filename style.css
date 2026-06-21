@@ -3013,16 +3013,6 @@ body {
 }
 
 /* ══════════════════════════════════════════
-   LENIS SMOOTH SCROLL
-   ══════════════════════════════════════════ */
-html.lenis, html.lenis body {
-  height: auto;
-}
-html.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-/* ══════════════════════════════════════════
    ACCESSIBILITY — prefers-reduced-motion
    Disables infinite/looping animations for users
    who have reduced motion enabled (WCAG 2.3.3).
