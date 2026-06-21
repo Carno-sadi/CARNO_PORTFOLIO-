@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carno | Web Developer</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Josefin+Sans:wght@700&family=Sreda&display=swap" rel="stylesheet">
+
+  <!-- ICONS -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- AOS — Scroll Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- Anime.js — REQUIRED in head for hero (typed role caption fade-in) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       PRELOADER
+       ══════════════════════════════════════════ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="pl-signature-stack">
+        <span class="pl-outline" aria-hidden="true">CARNO</span>
+        <span class="pl-fill" id="plFill" aria-hidden="true">CARNO</span>
+      </div>
+      <div class="pl-percent" id="plPercent">0%</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+
+    <!-- LEFT: Logo only -->
+    <div class="nav-logo" id="navLogo">
+      C<span class="nav-dot" id="navDot">.</span>arno
+    </div>
+
+    <!-- RIGHT: Nav Links (moved from center, CTA removed) -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero"     class="nav-link active">home</a></li>
+      <li><a href="#about"    class="nav-link">about</a></li>
+      <li><a href="#skills"   class="nav-link">skills</a></li>
+      <li><a href="#achievements" class="nav-link">achievements</a></li>
+      <li><a href="#projects" class="nav-link">projects</a></li>
+      <li><a href="#contact"  class="nav-link">contact</a></li>
+    </ul>
+
+    <!-- MOBILE: Hamburger — NO border, clean icon -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+
+    <!-- Scan Line -->
+    <div class="nav-scanline"></div>
+
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       TOP DROPDOWN MENU (replaces side drawer)
+       ══════════════════════════════════════════ -->
+  <div class="top-menu-overlay" id="topMenuOverlay"></div>
+  <div class="top-menu" id="topMenu">
+    <ul class="top-menu-links" id="topMenuLinks">
+      <li><a href="#hero"     class="top-menu-link"><span class="tm-num">01</span>home</a></li>
+      <li><a href="#about"    class="top-menu-link"><span class="tm-num">02</span>about</a></li>
+      <li><a href="#skills"   class="top-menu-link"><span class="tm-num">03</span>skills</a></li>
+      <li><a href="#projects" class="top-menu-link"><span class="tm-num">04</span>projects</a></li>
+      <li><a href="#contact"  class="top-menu-link"><span class="tm-num">05</span>contact</a></li>
+    </ul>
+    <div class="top-menu-scanline"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       Placeholder sections (for scroll testing)
+       ══════════════════════════════════════════ -->
+  <section id="hero" data-section="hero" class="hero">
+
+    <!-- Layer 0: Particle canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Layer 1: Content -->
+    <div class="hero-content">
+
+      <!-- CARNO — ml10 letter slide-up arrival -->
+      <div class="ml10" id="carnoName">
+        <div class="text-wrapper">
+          <span class="letters">CARNO</span>
+        </div>
+      </div>
+
+      <!-- CTA Buttons — Blob effect with inline typed role caption between them -->
+      <div class="cta-row" id="ctaRow">
+
+        <div class="mag-wrap" id="magGh">
+          <div class="mag-inner">
+            <a href="https://github.com" target="_blank"
+               class="cta-btn cta-gh" id="btnGh">
+              <span class="blob"></span>
+              <span class="btn-content">
+                <i class="ri-github-fill"></i>
+                <span>GitHub</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <p class="i-am-inline">
+          <span id="typedRole" class="typed-target"></span><span class="typed-cursor" aria-hidden="true">|</span>
+        </p>
+
+        <div class="mag-wrap" id="magLi">
+          <div class="mag-inner">
+            <a href="https://linkedin.com" target="_blank"
+               class="cta-btn cta-li" id="btnLi">
+              <span class="blob"></span>
+              <span class="btn-content">
+                <i class="ri-linkedin-fill"></i>
+                <span>LinkedIn</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint" id="scrollHint">
+      <span class="scroll-arrow">↓</span>
+      <span>scroll</span>
+    </div>
+
+  </section>
+  <section class="about" id="about" data-section="about">
+
+    <div class="about-header">
+      <div class="header-line" id="headerLine"></div>
+      <div class="header-text">
+        <span class="header-comment">// about.exe</span>
+        <h2 class="header-name">
+          <span class="reveal-clip"><span class="reveal-inner">Sadi Muhammad</span></span>
+          <span class="reveal-clip"><span class="reveal-inner aka">Carno</span></span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch01">
+      <div class="chapter-meta">
+        <span class="ch-number">Chapter One</span>
+        <div class="ch-line" data-line></div>
+      </div>
+      <div class="chapter-content">
+        <h3 class="ch-title">"The Beginning"</h3>
+        <div class="word-reveal" id="ch01Text">
+          Sylhet, Bangladesh. A young man who never thought
+          he would one day write code. Late 2025 — inspired
+          by a friend who had already taken Bangladesh to the
+          international stage, the journey began. That moment
+          planted a single thought: "I can do this too."
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter chapter-dramatic" id="ch02">
+      <div class="chapter-meta">
+        <span class="ch-number">Chapter Two</span>
+        <div class="ch-line" data-line></div>
+      </div>
+      <div class="chapter-content">
+        <h3 class="ch-title">"The Project That Matters"</h3>
+
+        <div class="medilink-name" id="medilinkName" data-target="MediLink AI">
+        </div>
+
+        <div class="medilink-features">
+          <div class="feature-item">
+            <span class="feature-icon">◈</span>
+            <span class="feature-text">Book a doctor appointment from anywhere in Bangladesh</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">◈</span>
+            <span class="feature-text">Order medicine delivered to your doorstep</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">◈</span>
+            <span class="feature-text">Emergency services — completely free of charge</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">◈</span>
+            <span class="feature-text">Available in Free and Paid plans</span>
+          </div>
+        </div>
+
+        <div class="intl-badge">
+          <span class="intl-flag">🇧🇩</span>
+          <span class="intl-text">Representing Bangladesh on the International Stage</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="chapter" id="ch03">
+      <div class="chapter-meta">
+        <span class="ch-number">Chapter Three</span>
+        <div class="ch-line" data-line></div>
+      </div>
+      <div class="chapter-content">
+        <h3 class="ch-title">"Off the Clock"</h3>
+
+        <div class="interests-grid">
+
+          <div class="interest-block">
+            <div class="int-label">Anime</div>
+            <ul class="int-list">
+              <li>Naruto</li>
+              <li>Attack on Titan</li>
+              <li>Vinland Saga</li>
+            </ul>
+          </div>
+
+          <div class="interest-block">
+            <div class="int-label">Gaming</div>
+            <ul class="int-list">
+              <li>Valorant <span class="int-tag">PC</span></li>
+              <li>Free Fire <span class="int-tag">Mobile</span></li>
+            </ul>
+          </div>
+
+          <div class="interest-block">
+            <div class="int-label">Series</div>
+            <ul class="int-list">
+              <li>Stranger Things</li>
+              <li>Breaking Bad</li>
+              <li>Alice in Borderland</li>
+              <li>All of Us Are Dead</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter chapter-final" id="ch04">
+      <div class="chapter-meta">
+        <span class="ch-number">Chapter Four</span>
+        <div class="ch-line" data-line></div>
+      </div>
+      <div class="chapter-content">
+        <h3 class="ch-title">"What's Next"</h3>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-num" data-target="18">0</span>
+            <span class="stat-label">Years Old</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="3">0</span>
+            <span class="stat-label">Projects Built</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" data-target="1">0</span>
+            <span class="stat-label">International</span>
+          </div>
+        </div>
+
+        <div class="word-reveal" id="ch04Text">
+          Age 18. Alim, 2nd Year. Three projects built.
+          One already on the international stage.
+          The goal is simple: become a good developer
+          and represent Bangladesh. That is enough.
+        </div>
+
+        <div class="final-motto">
+          <div class="final-line" id="finalLine"></div>
+          <blockquote class="final-quote">"Just do what you like."</blockquote>
+          <cite class="final-cite">— Carno, Sylhet, Bangladesh</cite>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+  <!-- Skills Section -->
+  <section class="skills-section" id="skills" data-section="skills">
+    <!-- Particles Layer -->
+    <canvas id="skillsBg"></canvas>
+
+    <div class="skills-container">
+      
+      <!-- Section Header -->
+      <header class="skills-header">
+        <div class="skills-eyebrow">// skills.accordion()</div>
+        <div class="skills-title-container">
+          <h2 class="skills-title">What I Know</h2>
+        </div>
+        <div class="skills-header-line-wrapper">
+          <div class="skills-header-line"></div>
+        </div>
+        <p class="skills-subtitle">
+          An organized overview of my technical capabilities, workflows, and core tooling, structured for rapid synthesis.
+        </p>
+      </header>
+
+      <!-- Accordion Container (Dynamic JS Target) -->
+      <div class="accordion-container" id="accordionContainer"></div>
+
+      <!-- Stats Bar Summary -->
+      <div class="stats-bar" id="skillsStatsBar">
+        <div class="stat-item">
+          <div class="stat-number-wrapper">
+            <span class="stat-number" id="statTotal">0</span>
+          </div>
+          <div class="stat-label">Total Skills</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number-wrapper">
+            <span class="stat-number" id="statAdv">0</span>
+          </div>
+          <div class="stat-label">Advanced Skills</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number-wrapper">
+            <span class="stat-number" id="statDaily">0</span>
+            <span class="stat-plus">+</span>
+          </div>
+          <div class="stat-label">Daily Tools</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ===== ACHIEVEMENT SECTION ===== -->
+  <section class="achieve" id="achievements" data-section="achievements">
+    <div class="ach-header">
+      <span class="ach-eyebrow">// achievements.log()</span>
+      <div class="ach-title-wrap">
+        <span class="reveal-clip">
+          <span class="reveal-inner" id="achTitle">Milestones</span>
+        </span>
+      </div>
+      <div class="ach-header-line" id="achHeaderLine"></div>
+      <p class="ach-subtitle">A journey measured in results.</p>
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="timeline-line">
+        <div class="timeline-line-fill" id="timelineLineFill"></div>
+      </div>
+      <div class="timeline" id="timeline" style="position: relative"></div>
+    </div>
+  </section>
+  <section class="projects" id="projects" data-section="projects">
+    <!-- Animated background canvas -->
+    <canvas id="projBgCanvas"></canvas>
+
+    <!-- Section header -->
+    <div class="proj-header">
+      <span class="proj-eyebrow">// projects.render()</span>
+      <div class="proj-title-wrap">
+        <span class="reveal-clip">
+          <span class="reveal-inner" id="projTitle">What I've Built</span>
+        </span>
+      </div>
+      <div class="proj-header-line" id="projHeaderLine"></div>
+      <p class="proj-subtitle">
+        3 projects — 1 international representation.
+      </p>
+    </div>
+
+    <!-- Stack wrapper -->
+    <div class="proj-stack" id="projStack"></div>
+
+    <!-- Fixed progress dots -->
+    <div class="stack-dots" id="stackDots"></div>
+
+    <!-- CTA after the stack -->
+    <div class="proj-cta-wrap">
+      <a
+        href="https://github.com/Carno-sadi"
+        target="_blank"
+        class="proj-cta-btn"
+      >
+        <span class="btn-blob"></span>
+        <span class="btn-content">
+          <i class="ri-github-fill"></i>
+          <span>View All on GitHub</span>
+        </span>
+      </a>
+    </div>
+  </section>
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact" id="contact" data-section="contact">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h2 class="contact-headline">
+          <span class="reveal-clip">
+            <span class="reveal-inner hl-line">Let's build</span>
+          </span>
+          <span class="reveal-clip">
+            <span class="reveal-inner hl-line">something</span>
+          </span>
+          <span class="reveal-clip">
+            <span class="reveal-inner hl-line hl-accent">together.</span>
+          </span>
+        </h2>
+
+        <div class="contact-info" id="contactInfo">
+          <span class="info-name">Carno</span>
+          <span class="info-role">Web Developer</span>
+          <span class="info-location">Sylhet, Bangladesh</span>
+        </div>
+
+        <div class="contact-socials" id="contactSocials">
+          <a href="https://github.com/Carno-sadi" target="_blank" class="soc-link soc-github">
+            <span class="soc-blob"></span>
+            <span class="soc-content"><i class="ri-github-fill"></i><span>GitHub</span></span>
+          </a>
+          <a href="https://www.linkedin.com/in/carno-sadi-web-developer-91a824415/" target="_blank" class="soc-link soc-linkedin">
+            <span class="soc-blob"></span>
+            <span class="soc-content"><i class="ri-linkedin-fill"></i><span>LinkedIn</span></span>
+          </a>
+          <a href="mailto:carno478@gmail.com" class="soc-link soc-email">
+            <span class="soc-blob"></span>
+            <span class="soc-content"><i class="ri-mail-fill"></i><span>Email</span></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-divider">
+        <div class="divider-fill" id="dividerFill"></div>
+      </div>
+
+      <div class="contact-right">
+        <form id="contact-form" class="contact-form"
+              action="https://api.web3forms.com/submit" method="POST">
+
+          <input type="hidden" name="access_key" value="91f70302-8a24-4475-a595-7255b7efab60">
+          <input type="hidden" name="subject" value="New message from Carno Portfolio">
+
+          <div class="form-group">
+            <label for="inputName"> Your name:</label>
+            <input id="inputName" type="text" name="name" required placeholder="Your name" />
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail"> Your email:</label>
+            <input id="inputEmail" type="email" name="email" required placeholder="you@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="inputMessage"> Your message:</label>
+            <textarea id="inputMessage" name="message" required placeholder="Your message"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="formSubmit">
+            <span class="submit-blob"></span>
+            <span class="submit-content" id="submitContent">
+              <span>Send Message</span>
+              <i class="ri-arrow-right-line"></i>
+            </span>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER — Signature Reveal
+       ══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-signature-container">
+      <span class="sr-only">CARNO Signature</span>
+      <div class="signature-wrapper">
+        <div class="signature-text outline">CARNO</div>
+        <div class="signature-text fill">CARNO</div>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-info">
+        <span class="location">Based in Earth</span>
+        <span class="built-with">Built with Precision</span>
+      </div>
+      <a href="#hero" class="back-to-top">↑ Back to Top</a>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS (order per PRD §2)
+       ══════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 80, easing: 'ease-out-cubic' });
+  </script>
+  <script src="logic.js"></script>
+</body>
+</html>
